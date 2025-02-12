@@ -20,7 +20,7 @@
                         type="email" 
                         id="email" 
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="prenom.nom@youcode.ma"
+                        placeholder="prenom.nom@student.youcode.ma"
                         required
                     >
                 </div>
@@ -47,7 +47,7 @@
 
             <p class="mt-4 text-center text-gray-600">
                 Pas encore de compte? 
-                <a href="register.html" class="text-blue-600 hover:text-blue-700">
+                <a href="register.php" class="text-blue-600 hover:text-blue-700">
                     S'inscrire
                 </a>
             </p>

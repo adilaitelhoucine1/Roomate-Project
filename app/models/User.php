@@ -1,12 +1,12 @@
 <?php 
 require_once(__DIR__.'/../config/db.php');
 
-class User extends Db {
+class User  {
     protected $conn;
 
     public function __construct() {
-        parent::__construct();
-        $this->conn = $this->connection;
+        $db = new Db;
+        $this->conn = $db->connection;
     }
 
     public function register($userData) {

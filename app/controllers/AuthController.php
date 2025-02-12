@@ -62,7 +62,7 @@ class AuthController extends BaseController {
                 if ($_SESSION['user_role'] == "admin") {
                     header('Location: /admin/dashboard');
                 } else if ($_SESSION['user_role'] == "student") {
-                    header('Location: /student/dashboard');
+                   header('Location: student/dashboard'); 
                 }
             } else {
                 header('Location: /dashboard'); // Default redirect
@@ -74,6 +74,10 @@ class AuthController extends BaseController {
             exit();
         }
     }
+}
+
+public function  StudentDashboard(){
+    $this->render("/student/dashboard");
 }
 
    public function logout() {

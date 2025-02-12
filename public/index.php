@@ -26,16 +26,11 @@ Route::get('/', [HomeController::class, 'ShowHome']);
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);
 Route::get('/login', [AuthController::class, 'showleLogin']);
-Route::post('/login', [AuthController::class, 'handleLogin']);
+Route::post('/ValidateLogin', [AuthController::class, 'handleLogin']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // admin routers
 
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/users', [AdminController::class, 'handleUsers']);
-Route::get('/admin/categories', [AdminController::class, 'categories']);
-Route::get('/admin/testimonials', [AdminController::class, 'testimonials']);
-Route::get('/admin/projects', [AdminController::class, 'projects']);
 
 
 

@@ -1,73 +1,58 @@
 <?php 
 require_once(__DIR__.'/../config/db.php');
 
-class User  {
-    protected $conn;
 
-    public function __construct() {
-        $db = new Db;
-        $this->conn = $db->connection;
+
+
+class User extends Db {
+    protected $connection;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connection = $this->getConnection();
     }
 
-    public function register($userData) {
-        try {
-            $query = "INSERT INTO users (
-                email, 
-                password,
-                fullname,
-                gender,
-                study_year,
-                city_origin,
-                current_city,
-                bio,
-                profile_photo,
-                smoking,
-                pets,
-                guests
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+public function register($userData) {
+    try {
+        $query = "INSERT INTO users (
+            email, 
+            password,
+            fullname,
+            gender,
+            study_year,
+            city_origin,
+            current_city,
+            bio,
+            profile_photo,
+            smoking,
+            pets,
+            guests
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            $stmt = $this->conn->prepare($query);
-            
-            $stmt->execute([
-                $userData['email'],
-                $userData['password'],
-                $userData['fullname'],
-                $userData['gender'],
-                $userData['study_year'],
-                $userData['city_origin'],
-                $userData['current_city'],
-                $userData['bio'],
-                $userData['profile_photo'],
-                $userData['smoking'],
-                $userData['pets'],
-                $userData['guests']
-            ]);
-
-            return $this->conn->lastInsertId();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return false;
-        }
-    }
-
-    public function login($userData){
+        $stmt = $this->connection->prepare($query);
         
-        try {
-            $result = $this->conn->prepare("SELECT * FROM utilisateurs WHERE email=?");
-            $result->execute([$userData[0]]);
-            $user = $result->fetch(PDO::FETCH_ASSOC);
+        $stmt->execute([
+            $userData['email'],
+            $userData['password'],
+            $userData['fullname'],
+            $userData['gender'],
+            $userData['study_year'],
+            $userData['city_origin'],
+            $userData['current_city'],
+            $userData['bio'],
+            $userData['profile_photo'],
+            $userData['smoking'],
+            $userData['pets'],
+            $userData['guests']
+        ]);
 
-            if($user && password_verify($userData[1], $user["mot_de_passe"])){
-               
-
-               return  $user ;
-            
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        return $this->connection->lastInsertId();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
     }
+}
 
 
-  
 }

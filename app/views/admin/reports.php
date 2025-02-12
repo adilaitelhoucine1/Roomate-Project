@@ -90,17 +90,11 @@
                                 02/01/2024
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <div class="flex justify-end gap-3">
-                                    <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Voir les détails" onclick="openModal(1)">
-                                        <i class="fas fa-eye text-indigo-600"></i>
-                                    </button>
-                                    <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Marquer comme résolu">
-                                        <i class="fas fa-check text-emerald-600"></i>
-                                    </button>
-                                    <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Rejeter">
-                                        <i class="fas fa-times text-rose-600"></i>
-                                    </button>
-                                </div>
+                                <button onclick="openModal(1)" 
+                                        class="inline-flex items-center px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-lg transition-all gap-2 font-medium text-sm">
+                                    <i class="fas fa-eye"></i>
+                                    Voir détails
+                                </button>
                             </td>
                         </tr>
                     </tbody>

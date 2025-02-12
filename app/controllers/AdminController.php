@@ -9,14 +9,28 @@ class AdminController extends BaseController {
   
         
      }
-
+     public function ShowDashboard(){
+      $this->render('admin/dashboard');
+     }
+     public function Showlistings(){
+      $this->render('admin/listings');
+     }
+     public function Showusers(){
+      $this->render('admin/users');
+     }
+     public function Showreports(){
+      $this->render('admin/reports');
+     }
+     public function Showsettings(){
+      $this->render('admin/settings');
+     }
    public function index() {
       
       if(!isset($_SESSION['user_loged_in_id'])){
          header("Location: /login ");
          exit;
       }
-     $statistics =  $this->UserModel->getStatistics();
+     $statistics =  $this->UserModel->getStatistics();      
     $this->renderDashboard('admin/index', ["statistics" => $statistics]);
    }
    

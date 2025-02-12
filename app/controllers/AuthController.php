@@ -11,6 +11,7 @@ class AuthController extends BaseController {
 
       
    }
+   
 
    public function showRegister() {
       
@@ -54,32 +55,32 @@ class AuthController extends BaseController {
 }
    public function handleLogin() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['login_btn'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            
-            $userData = [$email, $password];
-            $user = $this->UserModel->login($userData);
-
-            if ($user) {
-               
-
-                $_SESSION['user_id'] = $user["id_user"];
-                $_SESSION['user_role'] = $user['role'];
-                $_SESSION['user_name'] = $user['nom'];
-                if ($user['role'] == "Formateur") {
-                    header('Location: /Formateur/dashboard');
-                } else if ($user['role'] == "Apprenant") {
-                    header('Location: /Etudiant/dashboard');
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        
+        if ($this->UserModel->login($email, $password)) {
+            // echo $_SESSION['user_role'];
+            // die();
+            if (isset($_SESSION['user_role'])) {
+                if ($_SESSION['user_role'] == "admin") {
+                    header('Location: /admin/dashboard');
+                } else if ($_SESSION['user_role'] == "student") {
+                   header('Location: student/dashboard'); 
                 }
-                exit;
+            } else {
+                header('Location: /dashboard'); // Default redirect
             }
+            exit();
+        } else {
             
-            // Si échec de connexion
-            header('Location: /ss');
-            exit;
+            header('Location: /login');
+            exit();
         }
     }
+}
+
+public function  StudentDashboard(){
+    $this->render("/student/dashboard");
 }
 
    public function logout() {

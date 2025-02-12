@@ -8,6 +8,7 @@ require_once '../core/Router.php';
 require_once '../core/Route.php';
 require_once '../app/controllers/HomeController.php';
 require_once '../app/controllers/AuthController.php';
+require_once '../app/controllers/StudentController.php';
 require_once '../app/controllers/AdminController.php';
 require_once '../app/config/db.php';
 
@@ -26,19 +27,20 @@ Route::get('/rent', [HomeController::class, 'showRent']);
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);
 Route::get('/login', [AuthController::class, 'showleLogin']);
-Route::post('/login', [AuthController::class, 'handleLogin']);
+Route::post('/ValidateLogin', [AuthController::class, 'handleLogin']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 // admin routers
-
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/users', [AdminController::class, 'handleUsers']);
-Route::get('/admin/categories', [AdminController::class, 'categories']);
-Route::get('/admin/testimonials', [AdminController::class, 'testimonials']);
-Route::get('/admin/projects', [AdminController::class, 'projects']);
-
-
-
+Route::get('/student/dashboard', [StudentController::class, 'ShowDashboard']);
+Route::get('/student/announcements', [StudentController::class, 'Showannouncements']);
+Route::get('/student/search', [StudentController::class, 'Showsearch']);
+Route::get('/student/messages', [StudentController::class, 'Showmessages']);
+Route::get('/student/profile', [StudentController::class, 'Showprofile']);
+Route::get('/admin/dashboard', [AdminController::class, 'ShowDashboard']);
+Route::get('/admin/listings', [AdminController::class, 'Showlistings']);
+Route::get('/admin/users', [AdminController::class, 'Showusers']);
+Route::get('/admin/reports', [AdminController::class, 'Showreports']);
+Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
 // end admin routes 
 
 // client Routes 

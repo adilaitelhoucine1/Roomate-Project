@@ -54,5 +54,34 @@ public function register($userData) {
     }
 }
 
+public function login($email, $password) {
+    try {
+        // First check if user exists and is active
+        $query = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute([$email]);
+        
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($password, $user['password'])) {
+            // Start session if not already started
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            
+            // Store user data in session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
+            $_SESSION['user_name'] = $user['fullname'];
+            $_SESSION['logged_in'] = true;
+            
+            return true;
+        }
+        return false;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
 
 }

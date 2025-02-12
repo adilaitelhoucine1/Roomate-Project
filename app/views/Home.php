@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomMate YouCode</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100">
-    
+
     <header class="bg-white shadow-sm">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">RoomMate YouCode</h1>
             <div class="space-x-4">
-                <a href="auth/login.php" class="text-gray-600 hover:text-blue-600">Connexion</a>
-                <a href="auth/register.php" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                <a href="/login" class="text-gray-600 hover:text-blue-600">Connexion</a>
+                <a href="/register" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     Inscription
                 </a>
             </div>
@@ -58,4 +60,5 @@
         </div>
     </main>
 </body>
+
 </html>

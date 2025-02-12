@@ -21,7 +21,7 @@ Route::setRouter($router);
 // Define routes
 // auth routes 
 Route::get('/', [HomeController::class, 'ShowHome']);
-
+Route::get('/rent', [HomeController::class, 'showRent']);
 
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);

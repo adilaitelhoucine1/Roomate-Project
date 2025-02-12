@@ -20,8 +20,10 @@ class AuthController extends BaseController {
       
     $this->render('auth/login');
    }
+
    
    public function handleRegister() {
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $userData = [

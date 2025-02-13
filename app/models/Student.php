@@ -64,5 +64,56 @@ class Student extends Db {
 
         return $announcement;
     }
+
+    public function GetinfoUSer($user_id) {
+        $sql = "SELECT * from users where id=?";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([$user_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateProfileUser($data) {
+        $sql = "UPDATE users SET 
+                fullname = :fullname,
+                email = :email,
+                gender = :gender,
+                city_origin = :city_origin,
+                current_city = :current_city,
+                bio = :bio,
+                smoking = :smoking,
+                pets = :pets,
+                guests = :guests
+                WHERE id = :id";
+
+        try {
+            $stmt = $this->connection->prepare($sql);
+            return $stmt->execute([
+                'id' => $data['id'],
+                'fullname' => $data['fullname'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'city_origin' => $data['city_origin'],
+                'current_city' => $data['current_city'],
+                'bio' => $data['bio'],
+                'smoking' => $data['smoking'],
+                'pets' => $data['pets'],
+                'guests' => $data['guests']
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function desactivateUserStudent($id) {
+     
+            $sql = "UPDATE users 
+                    SET status = 'inactive'
+                    WHERE id = :id";
+                    
+            $stmt = $this->connection->prepare($sql);
+            return $stmt->execute(['id' => $id]);
+      
+    }
 }
 ?>

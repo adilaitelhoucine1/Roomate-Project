@@ -69,12 +69,23 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
+
+                    <?php foreach ($AllUsers as $user) { ?>
+
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <div class="relative">
                                         <div class="absolute inset-0 bg-blue-200 rounded-full blur-md opacity-50"></div>
                                         <img class="relative h-10 w-10 rounded-full ring-2 ring-white shadow-sm" 
+
+                                             src="<?= $user["profile_photo"]; ?>" alt="">
+                                        <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-white shadow-sm"></span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-semibold text-gray-900"><?= $user["fullname"]; ?></div>
+                                        <div class="text-xs text-gray-500">ID: #<?= $user["id"]; ?></div>
+
                                              src="https://st3.depositphotos.com/4060975/17707/v/450/depositphotos_177073010-stock-illustration-male-vector-icon.jpg" alt="">
                                         <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-white shadow-sm"></span>
                                     </div>
@@ -85,19 +96,31 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
+
+                                <div class="text-sm font-medium text-gray-900"><?= $user["email"]; ?></div>
+                                <!-- <div class="text-xs text-gray-500">+212 612345678</div> -->
+
                                 <div class="text-sm font-medium text-gray-900">ahmed.m@youcode.ma</div>
                                 <div class="text-xs text-gray-500">+212 612345678</div>
+
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-purple-50 to-purple-100 text-purple-800 border border-purple-200">
                                     <i class="fas fa-user-shield mr-1.5"></i>
+
+                                    <?= $user["role"]; ?>
                                     Utilisateur
+
                                 </span>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center px-2.5 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-green-50 to-green-100 text-green-800 border border-green-200">
                                     <i class="fas fa-check-circle mr-1.5"></i>
+
+                                    <?= $user["status"]; ?>
+
                                     Actif
+
                                 </span>
                             </td>
                             <td class="px-6 py-4">
@@ -109,6 +132,45 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex items-center justify-center gap-2">
+
+                                   <form action="/admin/users" method="post">
+                                    <input type="hidden" name="user_id" value="<?= $user["id"]; ?>">
+                                   <button name="deleteuser" class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors" title="delete user">
+                                    <i class="fas fa-user-times"></i>
+                                    </button>
+                                    </form>
+
+                                    <!-- <button class="p-1.5 rounded-lg hover:bg-yellow-50 text-yellow-600 transition-colors" title="Suspendre">
+                                        <i class="fas fa-user-clock"></i>
+                                    </button> -->
+                                    <form action="/admin/change_status" method="post">
+
+                            <button name="block_user" class="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors" title="Bannir">
+                                <input type="hidden" name="status" value=" <?= $user["status"]; ?>">
+                                <input type="hidden" name="id" value=" <?= $user["id"]; ?>">
+
+                                    <?php if( $user["status"]== "inactive"){
+                                         ?>
+                                    <i class="fas fa-user-slash"></i>
+
+                                    <?php }else{ ?>
+                                        <i class="fas fa-user-shield"></i>
+
+                                    <?php } ?>
+
+                                    </button>
+                                    </form>
+
+
+
+                                    <!-- <button class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors" title="user's detail info">
+                                        <i class="fas fa-user-tag"></i></button> -->
+                                </div>
+                            </td>
+                        </tr>
+                        <?php } ?>
+
+
                                     <button class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors" title="Éditer">
                                         <i class="fas fa-user-edit"></i>
                                     </button>
@@ -124,9 +186,11 @@
                                 </div>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
+
 
             <!-- Enhanced Pagination -->
             <div class="mt-8 flex justify-between items-center">
@@ -145,3 +209,5 @@
     </div>
 </body>
 </html>
+
+

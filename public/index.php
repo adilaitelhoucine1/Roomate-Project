@@ -51,17 +51,27 @@ Route::get('/student/DesactiverAccoutStudent/{id}', [StudentController::class, '
 
 Route::get('/admin/dashboard', [AdminController::class, 'ShowDashboard']);
 Route::get('/admin/listings', [AdminController::class, 'Showlistings']);
+
 Route::get('/admin/users', [AdminController::class, 'Showusers']);
+
 Route::get('/admin/reports', [AdminController::class, 'Showreports']);
 Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
 
 Route::post('/admin/reports/update', [AdminController::class, 'updateReport']); // Add this line for report updates
 
 
+
 Route::get('/admin/delete/{id}', [AdminController::class, 'handleDeleteAnnouncementAdmin']);
 Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnouncement']);
 Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
 
+
+Route::get('/admin/delete/{id}', [AdminController::class, 'handleDeleteAnnouncementAdmin']);
+Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnouncement']);
+Route::get('/admin/users', [AdminController::class, 'ShowUsers']);
+Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
+Route::post('/admin/users', [AdminController::class, 'RemoveUsers']);
+Route::post('/admin/change_status', [AdminController::class, 'blockUsers']);
 
 
 // end admin routes 

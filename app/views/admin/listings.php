@@ -75,7 +75,7 @@
 
                                 <!-- Budget -->
                                 <div class="flex flex-col gap-2">
-                                    <span class="text-xs font-medium text-blue-600 uppercase tracking-wider">Budget</span>
+                                    <span class="text-xs font-medium text-blue-600 uppercase tracking-wider">Prix</span>
                                     <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
                                         <i class="fas fa-money-bill text-green-500"></i>
                                         <span class="font-bold text-gray-800"><?php echo $announcement['price']; ?> DH</span>
@@ -107,13 +107,13 @@
                                 <div class="flex flex-col gap-2">
                                     <span class="text-xs font-medium text-blue-600 uppercase tracking-wider">Actions</span>
                                     <div class="flex flex-col gap-2">
-                                        <?php if ($announcement['status'] == 'active') : ?>
+                                        <?php if ($announcement['status'] == 'active' ) : ?>
                                             <a href="/admin/deactivate/<?= $announcement['id'] ?>" 
                                                class="group flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-sm font-medium transition-all duration-300 shadow-sm hover:shadow">
                                                 <i class="fas fa-check text-xs group-hover:rotate-180 transition-transform duration-300"></i>
                                                 Activer
                                             </a>
-                                        <?php elseif ($announcement['status'] == 'inactive') : ?>
+                                        <?php elseif ($announcement['status'] == 'inactive' || $announcement['status'] == 'pending') : ?>
                                             <a href="/admin/activate/<?= $announcement['id'] ?>" 
                                                class="group flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 text-sm font-medium transition-all duration-300 shadow-sm hover:shadow">
                                                 <i class="fas fa-ban text-xs group-hover:rotate-180 transition-transform duration-300"></i>

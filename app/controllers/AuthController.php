@@ -93,7 +93,7 @@ public function  StudentDashboard(){
              unset($_SESSION['user_role']);
              session_destroy();
             
-             header("Location: /login");
+             header("Location: /");
              exit;
          }
    //   }

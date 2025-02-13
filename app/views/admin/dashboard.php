@@ -28,7 +28,7 @@
                         </div>
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Utilisateurs Total</h2>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">154</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalUsers; ?></p>
                             <p class="text-sm text-indigo-600 mt-2">+12% ce mois</p>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
                             <i class="fas fa-home text-2xl text-emerald-600"></i>
                         </div>
                         <div>
-                            <h2 class="text-sm font-medium text-gray-500">Annonces Actives</h2>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">45</p>
+                            <h2 class="text-sm font-medium text-gray-500">Total Annonces</h2>
+                            <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncements; ?></p>
                             <p class="text-sm text-emerald-600 mt-2">+5 aujourd'hui</p>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                             <i class="fas fa-check-circle text-2xl text-blue-600"></i>
                         </div>
                         <div>
-                            <h2 class="text-sm font-medium text-gray-500">Matchs Réussis</h2>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">28</p>
+                            <h2 class="text-sm font-medium text-gray-500">Annonces actives</h2>
+                            <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncementsActive; ?></p>
                             <p class="text-sm text-blue-600 mt-2">+3 cette semaine</p>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Signalements</h2>
-                            <p class="text-3xl font-bold text-gray-900 mt-1">3</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalSignals; ?></p>
                             <p class="text-sm text-rose-600 mt-2">2 en attente</p>
                         </div>
                     </div>

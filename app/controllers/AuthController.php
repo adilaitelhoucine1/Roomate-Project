@@ -11,6 +11,7 @@ class AuthController extends BaseController {
 
       
    }
+   
 
    public function showRegister() {
       

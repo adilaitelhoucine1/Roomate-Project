@@ -55,5 +55,14 @@ public function register($userData) {
     }
 }
 
+public function getAllUsers()
+    {
+        $query = "SELECT * FROM users where role = 'student' ";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
 
 }

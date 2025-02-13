@@ -48,6 +48,12 @@ class AdminController extends BaseController {
     $this->renderDashboard('admin/users',["users"=> $users]);
    }
 
+   public function allUsers() {
+      
+    
+     $allusers =  $this->UserModel->getAllUsers();
+    $this->renderDashboard('admin/index', ["allusers" => $allusers]);
+   }
     // function to remove user
     // function removeUser($idUser){
     //     include '../connection.php';

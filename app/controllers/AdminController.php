@@ -36,18 +36,39 @@ class AdminController extends BaseController {
    {
       $this->render('admin/settings');
 
+
+     public function handleDeleteAnnouncementAdmin($id){
+      $this->AnnouncementModel->deleteAnnouncementAdmin($id);
+      header("Location: /admin/listings");
+      exit;
+     }
+     public function handleActivateAnnouncement($id){
+      $this->AnnouncementModel->activateAnnouncement($id);
+      header("Location: /admin/listings");
+      exit;
+     }
+     public function handleDeactivateAnnouncement($id){
+      $this->AnnouncementModel->deactivateAnnouncement($id);   
+      header("Location: /admin/listings");
+      exit;
+     }
+     
+
+   
+   public function categories() {
    }
 
-   public function index() {
+//    public function index() {
       
-      if(!isset($_SESSION['user_loged_in_id'])){
+//       if(!isset($_SESSION['user_loged_in_id'])){
 
-         header("Location: /login ");
-         exit;
-      }
-      $statistics =  $this->UserModel->getStatistics();
-      $this->renderDashboard('admin/index', ["statistics" => $statistics]);
-   }
+//          header("Location: /login ");
+//          exit;
+//       }
+//       $statistics =  $this->UserModel->getStatistics();
+//       $this->renderDashboard('admin/index', ["statistics" => $statistics]);
+//    }
+
 
    public function categories()
    {

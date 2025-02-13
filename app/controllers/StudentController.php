@@ -2,16 +2,19 @@
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Student.php');
 require_once (__DIR__.'/../models/Announcement.php');
+require_once (__DIR__.'/../models/Message.php');
 
 class StudentController extends BaseController {
     private $UserModel;
     private $StudentModel;
     private $AnnouncementModel;
+    private $MessageModel;
 
     public function __construct(){
         $this->UserModel = new User();
         $this->StudentModel = new Student();
         $this->AnnouncementModel = new Announcement();
+        $this->MessageModel = new Message();
     }
     public function ShowDashboard() {
         $data = $this->AnnouncementModel->getallanounces();
@@ -22,7 +25,8 @@ class StudentController extends BaseController {
         $this->render('student/search');
     }
      public function Showmessages() { 
-        $this->render('student/messages');
+        $conversations = $this->MessageModel->getConversations($_SESSION['user_id']);
+        $this->render('student/messages', ['conversations' => $conversations]);
     }
      public function Showprofile() { 
         $user = $this->StudentModel->GetinfoUSer($_SESSION['user_id']);
@@ -132,6 +136,43 @@ class StudentController extends BaseController {
                 exit;
            // }
     
+    }
+
+    // Envoyer un nouveau message
+    public function sendMessage() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $senderId = $_SESSION['user_id'];
+            $receiverId = $_POST['receiver_id'];
+            $content = $_POST['content'];
+            $imageUrl = null;
+
+            // Gestion de l'upload d'image si présent
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+                $imageUrl = $this->handleImageUpload($_FILES['image']);
+            }
+
+            if ($this->MessageModel->sendMessage($senderId, $receiverId, $content, $imageUrl)) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'envoi du message']);
+            }
+            exit;
+        }
+    }
+
+    private function handleImageUpload($file) {
+        $uploadDir = 'uploads/messages/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = uniqid() . '_' . basename($file['name']);
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            return $targetPath;
+        }
+        return null;
     }
 }
 ?>

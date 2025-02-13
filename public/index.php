@@ -71,6 +71,11 @@ Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateA
 
 
 
+// Routes pour les messages
+Route::post('/student/messages/send', [StudentController::class, 'sendMessage']);
+
+
+
 // Dispatch the request
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 

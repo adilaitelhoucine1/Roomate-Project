@@ -23,7 +23,7 @@ class AdminController extends BaseController {
 
       if ($_SERVER["REQUEST_METHOD"] == "POST"){
          if (isset($_POST['deleteuser'])) {
-           
+             
              $id = $_POST['user_id'];
      $this->UserModel->removeUsers($id);      
 
@@ -40,6 +40,8 @@ class AdminController extends BaseController {
          if (isset($_POST['block_user'])) {
            
              $status = $_POST['status'];
+            
+
              $id = $_POST['id'];
 
      $this->UserModel->blockUsers($status,$id);      

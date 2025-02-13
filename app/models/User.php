@@ -126,10 +126,13 @@ public function removeUsers($id){
 
 // }
 public function blockUsers($status, $id) {
+    $status = trim(strtolower($status));
     try {
         if ($status == "inactive") {
+           
             $query = "UPDATE users SET status = 'active' WHERE id = :id";
         } else {
+            
             $query = "UPDATE users SET status = 'inactive' WHERE id = :id";
         }
 

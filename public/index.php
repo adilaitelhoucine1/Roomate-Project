@@ -42,7 +42,7 @@ Route::get('/admin/users', [AdminController::class, 'Showusers']);
 Route::get('/admin/reports', [AdminController::class, 'Showreports']);
 Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
 Route::post('/admin/users', [AdminController::class, 'RemoveUsers']);
-Route::post('/admin/users', [AdminController::class, 'blockUsers']);
+Route::post('/admin/change_status', [AdminController::class, 'blockUsers']);
 
 // end admin routes 
 

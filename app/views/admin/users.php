@@ -117,14 +117,19 @@
                                    <button name="deleteuser" class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors" title="delete user">
                                     <i class="fas fa-user-times"></i>
                                     </button>
+                                    </form>
+
                                     <!-- <button class="p-1.5 rounded-lg hover:bg-yellow-50 text-yellow-600 transition-colors" title="Suspendre">
                                         <i class="fas fa-user-clock"></i>
                                     </button> -->
+                                    <form action="/admin/change_status" method="post">
+
                             <button name="block_user" class="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors" title="Bannir">
                                 <input type="hidden" name="status" value=" <?= $user["status"]; ?>">
                                 <input type="hidden" name="id" value=" <?= $user["id"]; ?>">
 
-                                    <?php if( $user["status"]== "inactive"){ ?>
+                                    <?php if( $user["status"]== "inactive"){
+                                         ?>
                                     <i class="fas fa-user-slash"></i>
 
                                     <?php }else{ ?>
@@ -133,11 +138,12 @@
                                     <?php } ?>
 
                                     </button>
+                                    </form>
+
 
 
                                     <!-- <button class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors" title="user's detail info">
                                         <i class="fas fa-user-tag"></i></button> -->
-                                   </form>
                                 </div>
                             </td>
                         </tr>

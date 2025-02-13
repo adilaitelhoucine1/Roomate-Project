@@ -9,16 +9,57 @@ class AdminController extends BaseController {
   
         
      }
+     public function ShowDashboard(){
+      $this->render('admin/dashboard');
+     }
+     public function Showlistings(){
+      $this->render('admin/listings');
+     }
+     public function Showusers(){
+      $AllUsers =  $this->UserModel->getAllUsers();      
+      $this->render('admin/users', ["AllUsers" => $AllUsers]);
+     }
+     public function RemoveUsers(){
 
-   public function index() {
-      
-      if(!isset($_SESSION['user_loged_in_id'])){
-         header("Location: /login ");
-         exit;
-      }
-     $statistics =  $this->UserModel->getStatistics();
-    $this->renderDashboard('admin/index', ["statistics" => $statistics]);
-   }
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+         if (isset($_POST['deleteuser'])) {
+           
+             $id = $_POST['user_id'];
+     $this->UserModel->removeUsers($id);      
+
+           
+             
+         }
+     }
+     header('Location: /admin/users');
+
+     }
+     public function blockUsers(){
+
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+         if (isset($_POST['block_user'])) {
+           
+             $status = $_POST['status'];
+             $id = $_POST['id'];
+
+     $this->UserModel->blockUsers($status,$id);      
+
+           
+             
+         }
+     }
+     header('Location: /admin/users');
+
+     }
+     
+     public function Showreports(){
+      $this->render('admin/reports');
+     }
+     public function Showsettings(){
+      $this->render('admin/settings');
+     }
+  
+   
    
    public function categories() {
 
@@ -48,12 +89,6 @@ class AdminController extends BaseController {
     $this->renderDashboard('admin/users',["users"=> $users]);
    }
 
-   public function allUsers() {
-      
-    
-     $allusers =  $this->UserModel->getAllUsers();
-    $this->renderDashboard('admin/index', ["allusers" => $allusers]);
-   }
     // function to remove user
     // function removeUser($idUser){
     //     include '../connection.php';

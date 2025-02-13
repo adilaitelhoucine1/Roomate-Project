@@ -14,7 +14,6 @@ class User extends Db {
     }
 
 public function register($userData) {
-   
     try {
         $query = "INSERT INTO users (
             email, 
@@ -55,14 +54,94 @@ public function register($userData) {
     }
 }
 
-public function getAllUsers()
-    {
-        $query = "SELECT * FROM users where role = 'student' ";
+public function login($email, $password) {
+    try {
+        // First check if user exists and is active
+        $query = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute();
-
-        return $stmt->fetchAll();
+        $stmt->execute([$email]);
+        
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($password, $user['password'])) {
+            // Start session if not already started
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            
+            // Store user data in session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
+            $_SESSION['user_name'] = $user['fullname'];
+            $_SESSION['logged_in'] = true;
+            
+            return true;
+        }
+        return false;
+    } catch (PDOException $e) {
+        return false;
     }
+}
+public function getAllUsers()
+{
+    $query = "SELECT * FROM users where role='student'";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
+public function removeUsers($id){
+    $query = "DELETE FROM users WHERE id = :id";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindParam(":id" , $id);
+    
+    try{
+        $stmt->execute();
+        return 1;
+    }catch(PDOException $e){
+        die("Erreur Lors de Suppression : " . $e);
+    }
+}
+
+// public function blockUsers($status,$id){
+//     if($status == "inactive"){
+//         $query = "UPDATE users SET status = 'active' WHERE id = :id";
+//         $stmt = $this->connection->prepare($query);
+//         $stmt->bindParam("id", $id);
+
+//     }else{
+//         $query = "UPDATE users SET status = 'inactive' WHERE id = :id";
+//         $stmt = $this->connection->prepare($query);
+//         $stmt->bindParam("id", $id);
+//     }
+   
+        
+//         try {
+//             $stmt->execute();
+//             return 1;
+//         }catch(PDOException $e){
+//             die("Erreur lors de Update status : " . $e);  
+//         }
+
+// }
+public function blockUsers($status, $id) {
+    try {
+        if ($status == "inactive") {
+            $query = "UPDATE users SET status = 'active' WHERE id = :id";
+        } else {
+            $query = "UPDATE users SET status = 'inactive' WHERE id = :id";
+        }
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(":id", $id); 
+        $stmt->execute();  
+        
+        return 1;
+    } catch (PDOException $e) {
+        die("Erreur lors de la mise à jour du statut : " . $e->getMessage());
+    }
+}
 
 
 }

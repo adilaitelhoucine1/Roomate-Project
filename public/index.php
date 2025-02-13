@@ -28,7 +28,7 @@ Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);
 Route::get('/login', [AuthController::class, 'showleLogin']);
 Route::post('/ValidateLogin', [AuthController::class, 'handleLogin']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 // admin routers
 Route::get('/student/dashboard', [StudentController::class, 'ShowDashboard']);

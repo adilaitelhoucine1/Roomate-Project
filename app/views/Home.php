@@ -12,8 +12,8 @@
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">RoomMate YouCode</h1>
             <div class="space-x-4">
-                <a href="login.html" class="text-gray-600 hover:text-blue-600">Connexion</a>
-                <a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                <a href="/login" class="text-gray-600 hover:text-blue-600">Connexion</a>
+                <a href="/register" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     Inscription
                 </a>
             </div>

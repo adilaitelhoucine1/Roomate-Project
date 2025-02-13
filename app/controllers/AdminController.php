@@ -71,8 +71,6 @@ class AdminController extends BaseController {
 
 
    
-   public function categories() {
-   }
 
 //    public function index() {
       

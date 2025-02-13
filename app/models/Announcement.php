@@ -10,84 +10,49 @@ class Announcement extends Db {
         parent::__construct();
         $this->connection = $this->getConnection();
     }
-
-    public function create($data, $photos) {
-        try {
-            $this->connection->beginTransaction();
-
-            $sql = "INSERT INTO announcements (
-                title, 
-                description, 
-                city, 
-                type, 
-                search_type, 
-                cohabitation_rules, 
-                preferred_roommate_criteria, 
-                status, 
-                user_id
-            ) VALUES (
-                :title, 
-                :description, 
-                :city, 
-                :type, 
-                :search_type, 
-                :cohabitation_rules, 
-                :preferred_roommate_criteria, 
-                :status, 
-                :user_id
-            )";
-            
-            $stmt = $this->connection->prepare($sql);
-            $stmt->execute($data);
-            $announcementId = $this->connection->lastInsertId();
-
-            // Insert into offer_announcements table
-            $sqlOffer = "INSERT INTO offer_announcements (
-                announcement_id,
-                price,
-                address,
-                capacity
-            ) VALUES (
-                :announcement_id,
-                :price,
-                :address,
-                :capacity
-            )";
-
-            $stmtOffer = $this->connection->prepare($sqlOffer);
-            $stmtOffer->execute([
-                'announcement_id' => $announcementId,
-                'price' => $data['price'],
-                'address' => $data['address'],
-                'capacity' => $data['capacity']
-            ]);
-
-            // Insert photos
-            if (!empty($photos['tmp_name'])) {
-                $sqlPhoto = "INSERT INTO offer_photos (offer_id, photo_url) VALUES (:offer_id, :photo_url)";
-                $stmtPhoto = $this->connection->prepare($sqlPhoto);
-
-                foreach ($photos['tmp_name'] as $key => $tmp_name) {
-                    $fileName = uniqid() . '_' . $photos['name'][$key];
-                    $uploadPath = 'uploads/offers/' . $fileName;
-                    
-                    if (move_uploaded_file($tmp_name, $_SERVER['DOCUMENT_ROOT'] . '/' . $uploadPath)) {
-                        $stmtPhoto->execute([
-                            'offer_id' => $announcementId,
-                            'photo_url' => $uploadPath
-                        ]);
-                    }
-                }
-            }
-
-            $this->connection->commit();
-            return true;
-
-        } catch (Exception $e) {
-            $this->connection->rollBack();
-            throw $e;
-        }
+    public function getAllAnnacementsAdmin(){
+        $sql = "
+        SELECT 
+            u.profile_photo, 
+            u.fullname, 
+            ann.id, 
+            ann.city, 
+            ann.status, 
+            ann.type, 
+            off.price, 
+            req.budget,
+            req.move_in_date,
+            ann.creation_date
+        FROM announcements ann
+        JOIN users u ON u.id = ann.user_id
+        LEFT JOIN offer_announcements off ON off.announcement_id = ann.id
+        LEFT JOIN request_announcements req ON req.announcement_id = ann.id
+    ";
+    $resultat = $this->connection->query($sql);
+    $announcements = $resultat->fetchAll(PDO::FETCH_ASSOC);
+    return $announcements;
+    
     }
+
+    public function deleteAnnouncement($id){
+        $sql = "DELETE FROM announcements WHERE id = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([$id]);
+    }
+
+    public function activateAnnouncement($id){
+        $sql = "UPDATE announcements SET status = 'active' WHERE id = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([$id]);
+    }
+
+    public function deactivateAnnouncement($id){
+        $sql = "UPDATE announcements SET status = 'inactive' WHERE id = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([$id]);
+    }
+    
+  
 
     public function getallanouncesbyuser()
 {
@@ -223,6 +188,7 @@ LEFT JOIN
 
 
     public function createAnnouncement($data) {
+
    
         $this->connection->beginTransaction();
 

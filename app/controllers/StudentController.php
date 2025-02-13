@@ -25,7 +25,8 @@ class StudentController extends BaseController {
         $this->render('student/messages');
     }
      public function Showprofile() { 
-        $this->render('student/profile');
+        $user = $this->StudentModel->GetinfoUSer($_SESSION['user_id']);
+        $this->render('student/profile', ['user' => $user]);
     }
 
     public function storeAnnouncement() {
@@ -98,6 +99,39 @@ class StudentController extends BaseController {
         exit;
     }
 
-   
+    public function updateProfile() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id' => $_SESSION['user_id'],
+                'fullname' => $_POST['fullname'],
+                'email' => $_POST['email'],
+                'gender' => $_POST['gender'],
+                'city_origin' => $_POST['city_origin'],
+                'current_city' => $_POST['current_city'],
+                'bio' => $_POST['bio'],
+                'smoking' => $_POST['smoking'],
+                'pets' => $_POST['pets'],
+                'guests' => $_POST['guests']
+            ];
+
+            if ($this->StudentModel->updateProfileUser($data)) {
+                header('Location: /student/profile?success=true');
+                exit;
+            } else {
+                header('Location: /student/profile?error=true');
+                exit;
+            }
+        }
+    }
+
+    public function DesactiverAccoutStudent($id) {
+        //if ($id == $_SESSION['user_id']) {
+            $this->StudentModel->desactivateUserStudent($id);
+                session_destroy();
+                header('Location: /login?deactivated=true');
+                exit;
+           // }
+    
+    }
 }
 ?>

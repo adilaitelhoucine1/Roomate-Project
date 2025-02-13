@@ -42,6 +42,9 @@ Route::post('/student/announcements/delete', [StudentController::class, 'deleteA
 //Route::get('/student/announcements/edit/{id}', [StudentController::class, 'editAnnouncement']);
 Route::post('/student/announcements/edit/{id}', [StudentController::class, 'editAnnouncement']);
 
+Route::post('/student/profile/update', [StudentController::class, 'updateProfile']);
+Route::get('/student/DesactiverAccoutStudent/{id}', [StudentController::class, 'DesactiverAccoutStudent']);
+
 
 
 

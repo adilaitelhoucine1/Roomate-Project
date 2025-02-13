@@ -41,6 +41,7 @@ Route::get('/admin/listings', [AdminController::class, 'Showlistings']);
 Route::get('/admin/users', [AdminController::class, 'Showusers']);
 Route::get('/admin/reports', [AdminController::class, 'Showreports']);
 Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
+Route::post('/admin/reports/update', [AdminController::class, 'updateReport']); // Add this line for report updates
 // end admin routes 
 
 // client Routes 

@@ -122,8 +122,8 @@
                 </div>
 
                 <!-- Announcements Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Announcement Card -->
+                <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
                     <?php foreach($data as $anno): ?>
                     <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                         <img src="<?= $anno['photo_url'] ?>" alt="Apartment" class="w-full h-48 object-cover">
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <?php endforeach; ?>
-                </div>
+                </div> -->
 
                 <!-- Pagination -->
                 <div class="flex justify-center mt-8">

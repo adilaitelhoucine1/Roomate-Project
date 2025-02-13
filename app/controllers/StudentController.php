@@ -2,6 +2,7 @@
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Student.php');
 require_once (__DIR__.'/../models/Announcement.php');
+require_once (__DIR__.'/../models/searchmodel.php');
 require_once (__DIR__.'/../models/Message.php');
 
 class StudentController extends BaseController {
@@ -22,7 +23,8 @@ class StudentController extends BaseController {
     }
 
      public function Showsearch() { 
-        $this->render('student/search');
+        $data = $this->AnnouncementModel->getallanounces();
+        $this->render('student/search',$data);
     }
      public function Showmessages() { 
         $conversations = $this->MessageModel->getConversations($_SESSION['user_id']);

@@ -33,7 +33,7 @@ class AdminController extends BaseController {
      }
 
      public function handleDeleteAnnouncement($id){
-      $this->AnnouncementModel->deleteAnnouncement($id);
+      $this->AnnouncementModel->deleteAnnouncementAdmin($id);
       header("Location: /admin/listings");
       exit;
      }

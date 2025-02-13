@@ -63,7 +63,6 @@ class AdminController extends BaseController
       $status = $_POST['status'];
       $adminNote = $_POST['admin_note'];
 
-      // Use $this->UserModel instead of $UserModel
       $success = $this->UserModel->updateReportStatus($reportId, $status, $adminNote);
 
       if ($success) {

@@ -34,7 +34,7 @@ class Announcement extends Db {
     
     }
 
-    public function deleteAnnouncement($id){
+    public function deleteAnnouncementAdmin($id){
         $sql = "DELETE FROM announcements WHERE id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$id]);

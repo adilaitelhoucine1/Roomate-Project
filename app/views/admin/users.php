@@ -86,22 +86,16 @@
                                         <div class="text-sm font-semibold text-gray-900"><?= $user["fullname"]; ?></div>
                                         <div class="text-xs text-gray-500">ID: #<?= $user["id"]; ?></div>
 
-                                             src="https://st3.depositphotos.com/4060975/17707/v/450/depositphotos_177073010-stock-illustration-male-vector-icon.jpg" alt="">
+                                             
                                         <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-400 border-2 border-white shadow-sm"></span>
                                     </div>
-                                    <div class="ml-4">
-                                        <div class="text-sm font-semibold text-gray-900">Ahmed Mohamed</div>
-                                        <div class="text-xs text-gray-500">ID: #USR-2024-001</div>
-                                    </div>
+                                    
                                 </div>
                             </td>
                             <td class="px-6 py-4">
 
                                 <div class="text-sm font-medium text-gray-900"><?= $user["email"]; ?></div>
-                                <!-- <div class="text-xs text-gray-500">+212 612345678</div> -->
-
-                                <div class="text-sm font-medium text-gray-900">ahmed.m@youcode.ma</div>
-                                <div class="text-xs text-gray-500">+212 612345678</div>
+                                
 
                             </td>
                             <td class="px-6 py-4">
@@ -171,18 +165,7 @@
                         <?php } ?>
 
 
-                                    <button class="p-1.5 rounded-lg hover:bg-blue-50 text-blue-600 transition-colors" title="Éditer">
-                                        <i class="fas fa-user-edit"></i>
-                                    </button>
-                                    <button class="p-1.5 rounded-lg hover:bg-yellow-50 text-yellow-600 transition-colors" title="Suspendre">
-                                        <i class="fas fa-user-clock"></i>
-                                    </button>
-                                    <button class="p-1.5 rounded-lg hover:bg-red-50 text-red-600 transition-colors" title="Bannir">
-                                        <i class="fas fa-user-slash"></i>
-                                    </button>
-                                    <button class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors" title="Historique">
-                                        <i class="fas fa-history"></i>
-                                    </button>
+                                    
                                 </div>
                             </td>
                         </tr>

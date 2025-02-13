@@ -135,32 +135,13 @@ class User extends Db
     }
 
 
-    public function getReports()
+    public function getAllUsers()
     {
-        $query = "SELECT 
-            r.*,
-            u.fullname as user_name,
-            u.profile_photo as user_image,
-            a.title as announcement_title,
-            COALESCE(r.admin_note, 'Non renseigné') as admin_note
-        FROM reports r
-        LEFT JOIN users u ON r.reporter_id = u.id
-        LEFT JOIN announcements a ON r.announcement_id = a.id
-        ORDER BY r.creation_date DESC";
 
+        $query = "SELECT * FROM users";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
-    }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    public function updateReportStatus($reportId, $status, $adminNote)
-    {
-        try {
-            $query = "UPDATE reports SET status = ?, admin_note = ? WHERE id = ?";
-            $stmt = $this->connection->prepare($query);
-            return $stmt->execute([$status, $adminNote, $reportId]);
-        } catch (PDOException $e) {
-            return false;
-        }
     }
 }

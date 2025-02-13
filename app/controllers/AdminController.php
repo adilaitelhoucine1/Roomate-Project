@@ -43,8 +43,8 @@ class AdminController extends BaseController
 
       ];
       $this->render('admin/listings', $data);
-     }
-    
+   }
+
    public function Showreports()
    {
       $reports = $this->AdminModel->getReports();
@@ -53,6 +53,11 @@ class AdminController extends BaseController
    public function Showsettings()
    {
       $this->render('admin/settings');
+   }
+   public function Showusers()
+   {
+      $AllUsers = $this->UserModel->getAllUsers();
+      $this->render('admin/users', ["AllUsers" => $AllUsers]);
    }
 
    public function handleDeleteAnnouncementAdmin($id)

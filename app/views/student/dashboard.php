@@ -16,7 +16,9 @@
         <main class="flex-1 p-8">
             <!-- Header with Welcome Message -->
             <div class="mb-8">
-                <h1 class="text-2xl font-bold text-gray-800">Bonjour, John! 👋</h1>
+                <h1 class="text-2xl font-bold text-gray-800">Bonjour, <?php $fullName = $_SESSION['user_name'];
+                                                                        $firstName = explode(" ", $fullName)[0];
+                                                                        echo $firstName; ?>! 👋</h1>
                 <p class="text-gray-600 mt-1">Voici un aperçu de votre activité</p>
             </div>
 
@@ -122,20 +124,22 @@
                 <!-- Announcements Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Announcement Card -->
+                    <?php foreach($data as $anno): ?>
                     <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                        <img src="https://via.placeholder.com/300x200" alt="Apartment" class="w-full h-48 object-cover">
+                        <img src="<?= $anno['photo_url'] ?>" alt="Apartment" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <div class="flex justify-between items-start mb-2">
-                                <h3 class="text-lg font-semibold text-gray-800">Studio Meublé</h3>
-                                <span class="text-blue-600 font-semibold">1500 DH</span>
+                                <h3 class="text-lg font-semibold text-gray-800"><?=$anno['title'] ?></h3>
+                                <span class="text-blue-600 font-semibold"><?= $anno['price'] ?></span>
                             </div>
-                            <p class="text-gray-600 text-sm mb-4">Youssoufia, proche de YouCode</p>
+                            <p class="text-gray-600 text-sm mb-4"><?= $anno['address'] ?></p>
                             <div class="flex items-center justify-between text-sm text-gray-500">
-                                <span><i class="fas fa-map-marker-alt mr-1"></i> Centre ville</span>
-                                <span><i class="fas fa-home mr-1"></i> Studio</span>
+                                <span><i class="fas fa-map-marker-alt mr-1"></i><?= $anno['city'] ?></span>
+                                <span> <?= $anno['status'] ?></span>
                             </div>
                         </div>
                     </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <!-- Pagination -->

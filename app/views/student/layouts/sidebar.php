@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
                 <i class="fas fa-user text-blue-500"></i>
             </div>
             <div>
-                <h3 class="text-gray-800 font-semibold">John Doe</h3>
+                <h3 class="text-gray-800 font-semibold "><?php echo $_SESSION['user_name']; ?></h3>
                 <p class="text-sm text-gray-500">Étudiant</p>
             </div>
         </div>

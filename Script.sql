@@ -2,7 +2,7 @@ create database roommate;
 
 
 
--- Table des utilisateurs 
+-- Table des utilisateurs
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -119,3 +119,5 @@ CREATE TABLE matches (
     FOREIGN KEY (user2_id) REFERENCES users(id),
     FOREIGN KEY (announcement_id) REFERENCES announcements(id)
 );
+--@block
+ALTER TABLE `reports` ADD `admin_note` TEXT NULL DEFAULT NULL AFTER `status`; 

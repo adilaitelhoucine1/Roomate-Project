@@ -33,6 +33,13 @@
                 <i class="fas fa-cog text-gray-500 mr-3 group-hover:text-blue-600 group-hover:scale-110 transition-all duration-300"></i>
                 <span class="group-hover:text-gray-900">Paramètres</span>
             </a>
+            
+            <a href="/logout" class="flex items-center px-4 py-3 text-gray-700 hover:bg-red-50 rounded-xl transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200">
+                    <i class="fas fa-sign-out-alt text-red-600"></i>
+                </div>
+                <span class="font-medium group-hover:text-red-600">Déconnexion</span>
+            </a>
         </div>
     </nav>
 

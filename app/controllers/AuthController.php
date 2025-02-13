@@ -21,8 +21,10 @@ class AuthController extends BaseController {
       
     $this->render('auth/login');
    }
+
    
    public function handleRegister() {
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $userData = [
@@ -91,7 +93,7 @@ public function  StudentDashboard(){
              unset($_SESSION['user_role']);
              session_destroy();
             
-             header("Location: /login");
+             header("Location: /");
              exit;
          }
    //   }

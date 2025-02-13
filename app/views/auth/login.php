@@ -21,7 +21,7 @@
                         id="email" 
                         name="email"
                         class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="prenom.nom@youcode.ma"
+                        placeholder="prenom.nom@student.youcode.ma"
                         required
                     >
                 </div>

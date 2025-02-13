@@ -46,15 +46,12 @@ class StudentController extends BaseController {
                 'photos' => htmlspecialchars($_POST['photos'])
             ];
 
-            try {
-                if ($this->StudentModel->createAnnouncement($data)) {
-                    header('Location: /student/announcements?success=true');
+    
+                if ($this->AnnouncementModel->createAnnouncement($data)) {
+                    header('Location: /student/announcements');
                     exit;
                 }
-            } catch (Exception $e) {
-                header('Location: /student/announcements?error=true');
-                exit;
-            }
+         
         }
     }
 
@@ -62,5 +59,45 @@ class StudentController extends BaseController {
         $announcements = $this->AnnouncementModel->getallanouncesbyuser();
         $this->render('student/announcements', $announcements);
     }
+
+    public function deleteAnnouncement() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['announcement_id'])) {
+            $announcementId = $_POST['announcement_id'];
+                if ($this->AnnouncementModel->deleteAnnouncement($announcementId, $_SESSION['user_id'])) {
+                    header('Location: /student/announcements');
+                    exit;
+                }
+           
+        }
+    }
+
+    public function editAnnouncement($id) {
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id' => $id,  
+                'title' =>$_POST['title'],
+                'description' =>$_POST['description'],
+                'city' =>$_POST['city'],
+                'type' =>$_POST['type'],
+                'search_type' =>$_POST['search_type'],
+                'cohabitation_rules' =>$_POST['cohabitation_rules'],
+                'preferred_roommate_criteria' =>$_POST['preferred_roommate_criteria'],
+                'user_id' => $_SESSION['user_id'],
+                'price' =>$_POST['price'],
+                'address' =>$_POST['address'],
+                'capacity' =>$_POST['capacity'],
+                'photos' =>$_POST['photos']
+            ];
+
+            $this->AnnouncementModel->updateAnnouncement($data);
+               
+        }
+
+        header('Location: /student/announcements');
+        exit;
+    }
+
+   
 }
 ?>

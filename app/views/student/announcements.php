@@ -8,7 +8,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-gray-50">
-    <!-- Modal -->
+    <!-- Edit Modal -->
+    <div id="editAnnouncementModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+        <div class="relative top-10 mx-auto p-8 border w-[600px] shadow-2xl rounded-xl bg-white max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6 pb-3 border-b">
+                <h3 class="text-2xl font-semibold text-gray-800">Modifier l'annonce</h3>
+                <button onclick="closeEditModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="editAnnouncementForm" method="POST" action="">
+                <input type="hidden" id="edit_announcement_id" name="announcement_id">
+                
+                <!-- Two columns layout for shorter fields -->
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_title">
+                            Titre <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="edit_title" name="title" required
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_city">
+                            Ville <span class="text-red-500">*</span>
+                        </label>
+                        <select id="edit_city" name="city" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Sélectionnez une ville</option>
+                            <option value="Nador">Nador</option>
+                            <option value="Asfi">Asfi</option>
+                            <option value="Youssefiya">Youssefiya</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_type">
+                            Type d'annonce <span class="text-red-500">*</span>
+                        </label>
+                        <select id="edit_type" name="type" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Sélectionnez le type</option>
+                            <option value="offer">Offre</option>
+                            <option value="request">Demande</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_search_type">
+                            Type de recherche <span class="text-red-500">*</span>
+                        </label>
+                        <select id="edit_search_type" name="search_type" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Sélectionnez le type de recherche</option>
+                            <option value="join_existing">Rejoindre un logement existant</option>
+                            <option value="search_together">Chercher ensemble</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Full width fields -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_description">
+                            Description <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="edit_description" name="description" rows="4" required
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_cohabitation_rules">
+                            Règles de cohabitation
+                        </label>
+                        <textarea id="edit_cohabitation_rules" name="cohabitation_rules" rows="3"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_preferred_roommate_criteria">
+                            Critères du colocataire souhaité
+                        </label>
+                        <textarea id="edit_preferred_roommate_criteria" name="preferred_roommate_criteria" rows="3"
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_price">
+                            Prix <span class="text-red-500">*</span>
+                        </label>
+                        <input type="number" id="edit_price" name="price" required
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_address">
+                            Adresse <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="edit_address" name="address" required
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_capacity">
+                            Capacité <span class="text-red-500">*</span>
+                        </label>
+                        <input type="number" id="edit_capacity" name="capacity" required
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="edit_photos">
+                            Photos (URLs séparées par des virgules)
+                        </label>
+                        <input type="text" id="edit_photos" name="photos"
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end gap-4 mt-8 pt-4 border-t">
+                    <button type="button" onclick="closeEditModal()"
+                            class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                        <i class="fas fa-times"></i> Annuler
+                    </button>
+                    <button type="submit"
+                            class="px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
+                        <i class="fas fa-save"></i> Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Modal -->
     <div id="announcementModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
         <div class="relative top-10 mx-auto p-8 border w-[600px] shadow-2xl rounded-xl bg-white max-h-[90vh] overflow-y-auto">
             <!-- Modal Header -->
@@ -211,12 +349,24 @@
                             <span><i class="far fa-comment mr-1"></i> 8 messages</span>
                         </div>
 
-                        <!-- Actions -->
+                    
                         <div class="flex items-center justify-between pt-4 border-t">
-                            <button class="text-blue-500 hover:text-blue-600">
+                            <button onclick="editAnnouncement(<?= $anouncement['id'] ?>, 
+                                '<?= $anouncement['title'] ?>', 
+                                '<?= $anouncement['city'] ?>', 
+                                '<?= $anouncement['type'] ?>', 
+                                '<?= $anouncement['search_type'] ?>', 
+                                '<?= $anouncement['description'] ?>', 
+                                '<?= $anouncement['cohabitation_rules'] ?>', 
+                                '<?= $anouncement['preferred_roommate_criteria'] ?>', 
+                                '<?= $anouncement['price'] ?>', 
+                                '<?= $anouncement['address'] ?>', 
+                                '<?= $anouncement['capacity'] ?>', 
+                                '<?= $anouncement['photo_url'] ?>')" 
+                                class="text-blue-500 hover:text-blue-600">
                                 <i class="fas fa-edit mr-1"></i> Modifier
                             </button>
-                            <button class="text-red-500 hover:text-red-600">
+                            <button onclick="deleteAnnouncement(<?= $anouncement['id'] ?>)" class="text-red-500 hover:text-red-600">
                                 <i class="fas fa-trash-alt mr-1"></i> Supprimer
                             </button>
                         </div>
@@ -227,8 +377,55 @@
         </main>
     </div>
 
-    <!-- Add JavaScript at the end of body -->
     <script>
+        function editAnnouncement(id, title, city, type, search_type, description, rules, criteria, price, address, capacity, photos) {
+            document.getElementById('editAnnouncementForm').action = `/student/announcements/edit/${id}`;
+            
+            // Remplir les champs du formulaire
+            document.getElementById('edit_announcement_id').value = id;
+            document.getElementById('edit_title').value = title;
+            document.getElementById('edit_city').value = city;
+            document.getElementById('edit_type').value = type;
+            document.getElementById('edit_search_type').value = search_type;
+            document.getElementById('edit_description').value = description;
+            document.getElementById('edit_cohabitation_rules').value = rules;
+            document.getElementById('edit_preferred_roommate_criteria').value = criteria;
+            document.getElementById('edit_price').value = price;
+            document.getElementById('edit_address').value = address;
+            document.getElementById('edit_capacity').value = capacity;
+            document.getElementById('edit_photos').value = photos;
+
+            // Afficher le modal
+            document.getElementById('editAnnouncementModal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editAnnouncementModal').classList.add('hidden');
+        }
+
+        function deleteAnnouncement(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/student/announcements/delete';
+                
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'announcement_id';
+                input.value = id;
+                
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        document.getElementById('editAnnouncementModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
         function openModal() {
             document.getElementById('announcementModal').classList.remove('hidden');
         }
@@ -237,7 +434,6 @@
             document.getElementById('announcementModal').classList.add('hidden');
         }
 
-        // Close modal when clicking outside
         document.getElementById('announcementModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();

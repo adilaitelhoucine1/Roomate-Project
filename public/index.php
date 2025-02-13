@@ -36,6 +36,10 @@ Route::get('/student/search', [StudentController::class, 'Showsearch']);
 Route::get('/student/messages', [StudentController::class, 'Showmessages']);
 Route::get('/student/profile', [StudentController::class, 'Showprofile']);
 Route::post('/student/announcements/store', [StudentController::class, 'storeAnnouncement']);
+Route::post('/student/announcements/delete', [StudentController::class, 'deleteAnnouncement']);
+//Route::get('/student/announcements/edit/{id}', [StudentController::class, 'editAnnouncement']);
+Route::post('/student/announcements/edit/{id}', [StudentController::class, 'editAnnouncement']);
+
 
 
 

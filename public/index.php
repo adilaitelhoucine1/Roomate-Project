@@ -22,7 +22,7 @@ Route::setRouter($router);
 // Define routes
 // auth routes 
 Route::get('/', [HomeController::class, 'ShowHome']);
-
+Route::get('/rent', [HomeController::class, 'showRent']);
 
 Route::get('/register', [AuthController::class, 'showRegister']);
 Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);
@@ -51,6 +51,9 @@ Route::get('/admin/listings', [AdminController::class, 'Showlistings']);
 Route::get('/admin/users', [AdminController::class, 'Showusers']);
 Route::get('/admin/reports', [AdminController::class, 'Showreports']);
 Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
+
+Route::post('/admin/reports/update', [AdminController::class, 'updateReport']); // Add this line for report updates
+
 
 Route::get('/admin/delete/{id}', [AdminController::class, 'handleDeleteAnnouncement']);
 Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnouncement']);

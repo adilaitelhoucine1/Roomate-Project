@@ -12,7 +12,7 @@
     <div class="flex">
         <?php include('layouts/admin_sidebar.php'); ?>
 
-        <main class="flex-1 p-8 ml-64">
+        <main class="flex-1 p-8 ml-72">
             <div class="flex justify-between items-center mb-8">
                 <div>
                     <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">

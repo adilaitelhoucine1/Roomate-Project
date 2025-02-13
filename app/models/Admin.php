@@ -36,9 +36,17 @@ class Admin extends User
         return $result['total_announcements'];
     }
 
+    public function getPendingSignals()
+    {
+        $sql = "SELECT COUNT(*) as pending_signals FROM reports where status = 'pending'";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['pending_signals'];
+    }
     public function getTotalSignals()
     {
-        $sql = "SELECT COUNT(*) as total_signals FROM reports where status = 'pending'";
+        $sql = "SELECT COUNT(*) as total_signals FROM reports";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -119,4 +119,7 @@ CREATE TABLE matches (
     FOREIGN KEY (user2_id) REFERENCES users(id),
     FOREIGN KEY (announcement_id) REFERENCES announcements(id)
 );
-ALTER TABLE `reports` ADD `admin_note` TEXT NULL DEFAULT NULL AFTER `status`; 
+ALTER TABLE `reports` ADD `admin_note` TEXT NULL DEFAULT NULL AFTER `status`;
+
+-- Modify email_verified column to BOOLEAN
+ALTER TABLE users MODIFY email_verified BOOLEAN DEFAULT FALSE;

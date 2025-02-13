@@ -3,7 +3,7 @@ session_start();
 
 
 
-require_once ('../core/BaseController.php');
+require_once('../core/BaseController.php');
 require_once '../core/Router.php';
 require_once '../core/Route.php';
 require_once '../app/controllers/HomeController.php';
@@ -29,6 +29,8 @@ Route::post('/ValidateRegister', [AuthController::class, 'handleRegister']);
 Route::get('/login', [AuthController::class, 'showleLogin']);
 Route::post('/ValidateLogin', [AuthController::class, 'handleLogin']);
 Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/auth/sendVerificationCode', [AuthController::class, 'sendVerificationCode']);
+Route::post('/auth/verifyCode', [AuthController::class, 'verifyCode']);
 
 // admin routers
 Route::get('/student/dashboard', [StudentController::class, 'ShowDashboard']);
@@ -70,6 +72,3 @@ Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateA
 
 // Dispatch the request
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
-
-
-

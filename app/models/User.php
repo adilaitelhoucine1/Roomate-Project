@@ -29,8 +29,10 @@ class User extends Db
             profile_photo,
             smoking,
             pets,
-            guests
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            guests,
+            email_verified,
+            verification_code
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->connection->prepare($query);
 
@@ -46,7 +48,9 @@ class User extends Db
                 $userData['profile_photo'],
                 $userData['smoking'],
                 $userData['pets'],
-                $userData['guests']
+                $userData['guests'],
+                $userData['verified'],
+                $userData['verification_code']
             ]);
 
             return $this->connection->lastInsertId();
@@ -85,5 +89,11 @@ class User extends Db
             return false;
         }
     }
-
+    // public function verifyEmail($email)
+    // {
+    //     $query = "UPDATE users SET verified = 1 WHERE email = ?";
+    //     $stmt = $this->connection->prepare($query);
+    //     $stmt->execute([$email]);
+    //     return $stmt->rowCount() > 0;
+    // }
 }

@@ -13,7 +13,7 @@
     <div class="flex min-h-screen">
         <?php include('layouts/admin_sidebar.php'); ?>
 
-        <main class="flex-1 p-8 ml-64">
+        <main class="flex-1 p-8 ml-72">
             <div class="mb-10">
                 <h1 class="text-3xl font-bold text-gray-900">Dashboard Administrateur</h1>
                 <p class="text-gray-600 mt-2">Bienvenue sur votre espace de gestion RoomMate YouCode</p>
@@ -29,7 +29,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Utilisateurs Total</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalUsers; ?></p>
-                            <p class="text-sm text-indigo-600 mt-2">+12% ce mois</p>
+                           
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Total Annonces</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncements; ?></p>
-                            <p class="text-sm text-emerald-600 mt-2">+5 aujourd'hui</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Annonces actives</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncementsActive; ?></p>
-                            <p class="text-sm text-blue-600 mt-2">+3 cette semaine</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,11 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Signalements</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalSignals; ?></p>
-                            <p class="text-sm text-rose-600 mt-2">2 en attente</p>
+                            <div class="flex items-center mt-3 bg-rose-100 px-4 py-2 rounded-xl border border-rose-200 shadow-sm">
+                                <span class="text-base font-bold text-rose-600"><?php echo $pendingSignals ? $pendingSignals : 0; ?></span>
+                                <span class="text-base text-rose-600 ml-2 font-semibold">en attente</span>
+                                <i class="fas fa-exclamation-circle ml-2 text-rose-500"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

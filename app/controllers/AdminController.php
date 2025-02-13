@@ -22,11 +22,13 @@ class AdminController extends BaseController
       $totalUsers = $this->AdminModel->getTotalUsers();
       $totalAnnouncements = $this->AdminModel->getTotalAnnouncements();
       $totalAnnouncementsActive = $this->AdminModel->getTotalAnnouncementsActive();
+      $pendingSignals = $this->AdminModel->getPendingSignals();
       $totalSignals = $this->AdminModel->getTotalSignals();
       $data = [
          'totalUsers' => $totalUsers,
          'totalAnnouncements' => $totalAnnouncements,
          'totalAnnouncementsActive' => $totalAnnouncementsActive,
+         'pendingSignals' => $pendingSignals,
          'totalSignals' => $totalSignals
       ];
       $this->render('admin/dashboard', $data);

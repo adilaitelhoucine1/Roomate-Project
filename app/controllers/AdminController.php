@@ -52,8 +52,9 @@ class AdminController extends BaseController {
    public function Showsettings()
    {
       $this->render('admin/settings');
+   }
 
-     public function handleDeleteAnnouncementAdmin($id){
+   public function handleDeleteAnnouncementAdmin($id){
 
       $this->AnnouncementModel->deleteAnnouncementAdmin($id);
       header("Location: /admin/listings");

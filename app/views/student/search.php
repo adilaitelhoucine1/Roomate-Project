@@ -150,12 +150,35 @@
                 </div>
             </div>
 
+<!-- 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <?php foreach($data as $anno): ?>
+                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <img src="<?= $anno['photo_url'] ?>" alt="Apartment" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold text-gray-800"><?=$anno['title'] ?></h3>
+                                <span class="text-blue-600 font-semibold"><?= $anno['price'] ?></span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4"><?= $anno['address'] ?></p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span><i class="fas fa-map-marker-alt mr-1"></i><?= $anno['city'] ?></span>
+                                <span> <?= $anno['status'] ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div> -->
+
+
+
             <!-- Search Results -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Result Card -->
+                <?php foreach($data as $anno): ?>
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
                     <div class="relative">
-                        <img src="https://via.placeholder.com/300x200" alt="Apartment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+                        <img src="<?= $anno['photo_url'] ?>" alt="Apartment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
                         <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded">Nouveau</span>
                         <button class="absolute top-4 right-4 bg-white/50 backdrop-blur-sm p-2 rounded-full hover:bg-white/75 transition-colors">
                             <i class="far fa-heart text-white"></i>
@@ -163,10 +186,10 @@
                     </div>
                     <div class="p-4">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-semibold text-gray-800">Studio Meublé</h3>
-                            <span class="text-lg font-bold text-blue-600">1500 DH</span>
+                            <h3 class="text-lg font-semibold text-gray-800"><?=$anno['title'] ?></h3>
+                            <span class="text-lg font-bold text-blue-600"><?= $anno['price'] ?></span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">Youssoufia, proche de YouCode</p>
+                        <p class="text-gray-600 text-sm mb-4"><?= $anno['address'] ?></p>
                         
                         <!-- Features -->
                         <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
@@ -181,7 +204,7 @@
                         </button>
                     </div>
                 </div>
-
+                <?php endforeach; ?>
                 <!-- Add more result cards here -->
             </div>
 

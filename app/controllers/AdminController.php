@@ -33,7 +33,7 @@ class AdminController extends BaseController {
      }
 
      public function handleDeleteAnnouncement($id){
-      $this->AnnouncementModel->deleteAnnouncement($id);
+      $this->AnnouncementModel->deleteAnnouncementAdmin($id);
       header("Location: /admin/listings");
       exit;
      }
@@ -49,15 +49,6 @@ class AdminController extends BaseController {
      }
      
 
-   public function index() {
-      
-      if(!isset($_SESSION['user_loged_in_id'])){
-         header("Location: /login ");
-         exit;
-      }
-     $statistics =  $this->UserModel->getStatistics();      
-    $this->renderDashboard('admin/index', ["statistics" => $statistics]);
-   }
    
    public function categories() {
 

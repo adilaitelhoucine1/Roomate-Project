@@ -37,7 +37,7 @@
                             id="email" 
                             name="email"
                             class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="prenom.nom@youcode.ma"
+                            placeholder="prenom.nom@student.youcode.ma"
                             required
                         >
                     </div>
@@ -319,12 +319,15 @@
                     return false;
                 }
 
+                if (!email.endsWith('@student.youcode.ma')) {
+                    alert('Veuillez utiliser votre email YouCode (@student.youcode.ma)');
+                    return false;
+                }
+
                 if (password !== confirmPassword) {
                     alert('Les mots de passe ne correspondent pas');
                     return false;
                 }
-
-            
             }
             return true;
         }

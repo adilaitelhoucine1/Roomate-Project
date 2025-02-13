@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomMate YouCode</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100">
-    
+
     <header class="bg-white shadow-sm">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">RoomMate YouCode</h1>
@@ -40,7 +42,7 @@
                 <p class="text-gray-600 mb-4">
                     Publiez votre annonce et trouvez les colocataires qui vous correspondent
                 </p>
-                <a href="register.html" class="text-blue-600 hover:text-blue-700">
+                <a href="auth/register.php" class="text-blue-600 hover:text-blue-700">
                     Publier une annonce →
                 </a>
             </div>
@@ -51,11 +53,12 @@
                 <p class="text-gray-600 mb-4">
                     Trouvez le logement et les colocataires qui correspondent à vos critères
                 </p>
-                <a href="register.html" class="text-blue-600 hover:text-blue-700">
+                <a href="auth/register.php" class="text-blue-600 hover:text-blue-700">
                     Rechercher un logement →
                 </a>
             </div>
         </div>
     </main>
 </body>
+
 </html>

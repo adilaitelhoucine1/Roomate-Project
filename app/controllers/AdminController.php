@@ -1,3 +1,4 @@
+
 <?php 
 require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Announcement.php');
@@ -40,15 +41,19 @@ class AdminController extends BaseController {
      }
      public function Showusers(){
       $this->render('admin/users');
-     }
-     public function Showreports(){
-      $this->render('admin/reports');
-     }
-     public function Showsettings(){
+   }
+  
+   public function Showreports()
+   {
+      $reports = $this->UserModel->getReports();
+      $this->render('admin/reports', ["reports" => $reports]);
+   }
+   public function Showsettings()
+   {
       $this->render('admin/settings');
-     }
 
-     public function handleDeleteAnnouncement($id){
+     public function handleDeleteAnnouncementAdmin($id){
+
       $this->AnnouncementModel->deleteAnnouncementAdmin($id);
       header("Location: /admin/listings");
       exit;
@@ -65,34 +70,53 @@ class AdminController extends BaseController {
      }
 
 
-   public function index() {
-      
-      if(!isset($_SESSION['user_loged_in_id'])){
-         header("Location: /login ");
-         exit;
-      }
-     $statistics =  $this->UserModel->getStatistics();      
-    $this->renderDashboard('admin/index', ["statistics" => $statistics]);
-   }
    
    public function categories() {
-
-    $this->renderDashboard('admin/categories');
-   }
-   public function testimonials() {
- 
-    $this->renderDashboard('admin/testimonials');
-   }
-   public function projects() {
-  
-    $this->renderDashboard('admin/projects');
    }
 
-   
+//    public function index() {
+      
+//       if(!isset($_SESSION['user_loged_in_id'])){
+
+//          header("Location: /login ");
+//          exit;
+//       }
+//       $statistics =  $this->UserModel->getStatistics();
+//       $this->renderDashboard('admin/index', ["statistics" => $statistics]);
+//    }
 
 
+   public function categories()
+   {
 
+      $this->renderDashboard('admin/categories');
+   }
+   public function testimonials()
+   {
 
- 
+      $this->renderDashboard('admin/testimonials');
+   }
+   public function projects()
+   {
 
-}
+      $this->renderDashboard('admin/projects');
+   }
+   public function updateReport()
+   {
+
+      $reportId = $_POST['report_id'];
+      $status = $_POST['status'];
+      $adminNote = $_POST['admin_note'];
+
+      // Use $this->UserModel instead of $UserModel
+      $success = $this->UserModel->updateReportStatus($reportId, $status, $adminNote);
+
+      if ($success) {
+         header('Location: /admin/reports?success=1');
+      } else {
+         header('Location: /admin/reports?error=1');
+      }
+      exit;
+   }
+
+   }

@@ -35,7 +35,7 @@ class AdminController extends BaseController {
    public function Showsettings()
    {
       $this->render('admin/settings');
-
+   }
 
      public function handleDeleteAnnouncementAdmin($id){
       $this->AnnouncementModel->deleteAnnouncementAdmin($id);
@@ -55,8 +55,6 @@ class AdminController extends BaseController {
      
 
    
-   public function categories() {
-   }
 
 //    public function index() {
       

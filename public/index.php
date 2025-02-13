@@ -41,6 +41,9 @@ Route::get('/admin/listings', [AdminController::class, 'Showlistings']);
 Route::get('/admin/users', [AdminController::class, 'Showusers']);
 Route::get('/admin/reports', [AdminController::class, 'Showreports']);
 Route::get('/admin/settings', [AdminController::class, 'Showsettings']);
+Route::get('/admin/delete/{id}', [AdminController::class, 'handleDeleteAnnouncement']);
+Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnouncement']);
+Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
 // end admin routes 
 
 // client Routes 

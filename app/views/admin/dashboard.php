@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50">
     <div class="flex min-h-screen">
         <?php include('layouts/admin_sidebar.php'); ?>
 
@@ -29,7 +29,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Utilisateurs Total</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalUsers; ?></p>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Total Annonces</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncements; ?></p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         <div>
                             <h2 class="text-sm font-medium text-gray-500">Annonces actives</h2>
                             <p class="text-3xl font-bold text-gray-900 mt-1"><?php echo $totalAnnouncementsActive; ?></p>
-                            
+
                         </div>
                     </div>
                 </div>

@@ -1,32 +1,36 @@
 
-<?php 
-require_once (__DIR__.'/../models/User.php');
-require_once (__DIR__.'/../models/Announcement.php');
+<?php
+require_once(__DIR__ . '/../models/User.php');
+require_once(__DIR__ . '/../models/Announcement.php');
 
-class AdminController extends BaseController {
-    private $UserModel ;
-    private $AnnouncementModel;
-    public function __construct(){
+class AdminController extends BaseController
+{
+   private $UserModel;
+   private $AnnouncementModel;
+   public function __construct()
+   {
 
-        $this->UserModel = new User();
-        $this->AnnouncementModel = new Announcement();
-        
-     }
+      $this->UserModel = new User();
+      $this->AnnouncementModel = new Announcement();
+   }
 
-     public function ShowDashboard(){
+   public function ShowDashboard()
+   {
       $this->render('admin/dashboard');
-     }
-     public function Showlistings(){
+   }
+   public function Showlistings()
+   {
       $announcements = $this->AnnouncementModel->getAllAnnacementsAdmin();
       $data = [
-        'announcements' => $announcements
+         'announcements' => $announcements
       ];
       $this->render('admin/listings', $data);
-     }
-     public function Showusers(){
+   }
+   public function Showusers()
+   {
       $this->render('admin/users');
    }
-  
+
    public function Showreports()
    {
       $reports = $this->UserModel->getReports();
@@ -35,12 +39,12 @@ class AdminController extends BaseController {
    public function Showsettings()
    {
       $this->render('admin/settings');
-
    }
 
-   public function index() {
-      
-      if(!isset($_SESSION['user_loged_in_id'])){
+   public function index()
+   {
+
+      if (!isset($_SESSION['user_loged_in_id'])) {
 
          header("Location: /login ");
          exit;
@@ -80,5 +84,4 @@ class AdminController extends BaseController {
       }
       exit;
    }
-
-
+}

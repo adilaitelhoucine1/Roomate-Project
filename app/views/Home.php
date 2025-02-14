@@ -19,6 +19,15 @@
             background-color: #f8fafc;
             pointer-events: none;
         }
+        #particles-js-secondary {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
         .content-wrapper {
             position: relative;
             z-index: 1;
@@ -69,7 +78,22 @@
 
 <body class="bg-transparent">
     <div id="particles-js"></div>
+    <div id="particles-js-secondary"></div>
+    <div id="particles-js-tertiary"></div>
+    <div id="particles-js-quaternary"></div>
     
+    <style>
+        #particles-js, #particles-js-secondary, #particles-js-tertiary, #particles-js-quaternary {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+
     <div class="content-wrapper">
         <header class="bg-white shadow-sm border-b border-gray-200">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -140,7 +164,7 @@
                 </div>
 
                 <!-- Statistics Section -->
-                <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-20 my-16">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-20 my-16 rounded-xl">
                     <div class="container mx-auto px-6">
                         <div class="grid md:grid-cols-3 gap-12 text-white ">
                             <div class="text-center">
@@ -328,104 +352,116 @@
                     </div>
                 </div>
                 <div class="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-                    <p>&copy; 2024 RoomMate YouCode. Tous droits réservés.</p>
+                    <p>&copy; 2025 RoomMate YouCode. Tous droits réservés.</p>
                 </div>
             </div>
         </footer>
     </div>
 
     <script>
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 100,
-                    "density": {
-                        "enable": true,
-                        "value_area": 1000
-                    }
-                },
-                "color": {
-                    "value": "#2563eb"
-                },
-                "shape": {
-                    "type": "circle"
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.2,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 0.3,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#3b82f6",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "bounce",
-                    "bounce": false,
-                    "attract": {
-                        "enable": true,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "window",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 200,
-                        "line_linked": {
-                            "opacity": 0.4
+        // Particle system configuration factory
+        function createParticleConfig(color, number, size, speed, opacity) {
+            return {
+                "particles": {
+                    "number": {
+                        "value": number,
+                        "density": {
+                            "enable": true,
+                            "value_area": 1000
                         }
                     },
-                    "push": {
-                        "particles_nb": 4
+                    "color": {
+                        "value": color
+                    },
+                    "shape": {
+                        "type": "circle"
+                    },
+                    "opacity": {
+                        "value": opacity,
+                        "random": false,
+                        "anim": {
+                            "enable": true,
+                            "speed": speed * 0.8,
+                            "opacity_min": opacity * 0.4,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": size,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": speed,
+                            "size_min": size * 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": color,
+                        "opacity": opacity * 0.8,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": speed,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "bounce",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
                     }
-                }
-            },
-            "retina_detect": true
-        });
+                },
+                "interactivity": {
+                    "detect_on": "window",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 200,
+                            "line_linked": {
+                                "opacity": opacity * 0.8
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 3
+                        }
+                    }
+                },
+                "retina_detect": true
+            };
+        }
 
-        // Make particles interactive with mouse movement
+        // Initialize all particle systems
+        particlesJS('particles-js', createParticleConfig('#2563eb', 150, 3, 1, 0.5));  // Blue
+        particlesJS('particles-js-secondary', createParticleConfig('#9681EB', 100, 2, 0.8, 0.3));  // Lavender
+        particlesJS('particles-js-tertiary', createParticleConfig('#14b8a6', 120, 2.5, 0.9, 0.4));  // Teal
+        particlesJS('particles-js-quaternary', createParticleConfig('#f472b6', 80, 2, 0.7, 0.2));  // Soft Pink
+
+        // Update mouse movement handler for all particle systems
         document.addEventListener('mousemove', function(e) {
-            if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS) {
-                const pJS = window.pJSDom[0].pJS;
-                pJS.interactivity.mouse.pos_x = e.clientX;
-                pJS.interactivity.mouse.pos_y = e.clientY;
+            if (window.pJSDom) {
+                window.pJSDom.forEach(function(system) {
+                    if (system && system.pJS) {
+                        system.pJS.interactivity.mouse.pos_x = e.clientX;
+                        system.pJS.interactivity.mouse.pos_y = e.clientY;
+                    }
+                });
             }
         });
     </script>

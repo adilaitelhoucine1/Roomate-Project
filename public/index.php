@@ -10,6 +10,7 @@ require_once '../app/controllers/HomeController.php';
 require_once '../app/controllers/AuthController.php';
 require_once '../app/controllers/StudentController.php';
 require_once '../app/controllers/AdminController.php';
+require_once '../app/controllers/searchcontroller.php';
 require_once '../app/config/db.php';
 
 
@@ -79,15 +80,10 @@ Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnou
 Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
 Route::post('/admin/users', [AdminController::class, 'RemoveUsers']);
 Route::post('/admin/change_status', [AdminController::class, 'blockUsers']);
-
-
-
 // end admin routes 
 
-// client Routes 
-// Route::get('/client/dashboard', [ClientController::class, 'index']);
-
-
+//api route search
+Route::get('/api/search', [search_controller::class, 'searchAnnouncements']);
 
 // Routes pour les messages
 Route::post('/student/messages/send', [StudentController::class, 'sendMessage']);

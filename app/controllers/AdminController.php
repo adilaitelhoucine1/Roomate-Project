@@ -79,6 +79,7 @@ class AdminController extends BaseController
       header("Location: /admin/listings");
       exit;
    }
+
      public function RemoveUsers(){
       if ($_SERVER["REQUEST_METHOD"] == "POST"){
          if (isset($_POST['deleteuser'])) {
@@ -94,6 +95,7 @@ class AdminController extends BaseController
 
      }
      public function blockUsers(){
+
 
       if ($_SERVER["REQUEST_METHOD"] == "POST"){
          if (isset($_POST['block_user'])) {

@@ -144,6 +144,7 @@ class User extends Db
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
+
     public function getAllUsers()
     {
 

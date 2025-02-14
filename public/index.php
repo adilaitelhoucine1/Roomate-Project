@@ -68,6 +68,11 @@ Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnou
 Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
 
 
+
+// Routes pour les messages
+Route::get('/student/messages', [StudentController::class, 'Showmessages']);
+Route::post('/student/messages/send', [StudentController::class, 'sendMessage']);
+
 Route::get('/admin/delete/{id}', [AdminController::class, 'handleDeleteAnnouncementAdmin']);
 Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnouncement']);
 
@@ -76,10 +81,16 @@ Route::post('/admin/users', [AdminController::class, 'RemoveUsers']);
 Route::post('/admin/change_status', [AdminController::class, 'blockUsers']);
 
 
+
 // end admin routes 
 
 // client Routes 
 // Route::get('/client/dashboard', [ClientController::class, 'index']);
+
+
+
+// Routes pour les messages
+Route::post('/student/messages/send', [StudentController::class, 'sendMessage']);
 
 
 

@@ -96,11 +96,7 @@ class AdminController extends BaseController
    // //    }
 
 
-   public function categories()
-   {
 
-      $this->renderDashboard('admin/categories');
-   }
    public function testimonials()
    {
 

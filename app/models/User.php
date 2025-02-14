@@ -134,6 +134,15 @@ class User extends Db
         }
     }
 
+    public function getUserById($userId) {
+        $sql = "SELECT id, fullname, email, profile_photo, role 
+                FROM users 
+                WHERE id = :userId";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
 
     public function getAllUsers()
     {
@@ -142,6 +151,7 @@ class User extends Db
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
     }
 }

@@ -142,6 +142,7 @@ class User extends Db
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['userId' => $userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+
     }
 
     public function getAllUsers()

@@ -31,6 +31,7 @@ Route::post('/ValidateLogin', [AuthController::class, 'handleLogin']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/auth/sendVerificationCode', [AuthController::class, 'sendVerificationCode']);
 Route::post('/auth/verifyCode', [AuthController::class, 'verifyCode']);
+Route::post('/auth/getMoroccanCities', [AuthController::class, 'getMoroccanCities']);
 
 // admin routers
 Route::get('/student/dashboard', [StudentController::class, 'ShowDashboard']);

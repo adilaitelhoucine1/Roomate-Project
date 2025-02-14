@@ -63,7 +63,9 @@ Route::get('/admin/activate/{id}', [AdminController::class, 'handleActivateAnnou
 Route::get('/admin/deactivate/{id}', [AdminController::class, 'handleDeactivateAnnouncement']);
 
 
-
+// Routes pour les messages
+Route::get('/student/messages', [StudentController::class, 'Showmessages']);
+Route::post('/student/messages/send', [StudentController::class, 'sendMessage']);
 // end admin routes 
 
 // client Routes 

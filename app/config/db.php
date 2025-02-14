@@ -1,9 +1,9 @@
 <?php 
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'roomate'); 
+define('DB_NAME', 'roommate'); 
 define('DB_USER', 'root');    
-define('DB_PASSWORD', '06database@SM23');    
+define('DB_PASSWORD', '');    
 
 
 

@@ -27,8 +27,24 @@ class StudentController extends BaseController {
         $this->render('student/search',$data);
     }
      public function Showmessages() { 
+        $userId = $_GET['user'] ?? null;
+        $announcementId = $_GET['announcement'] ?? null;
+        
         $conversations = $this->MessageModel->getConversations($_SESSION['user_id']);
-        $this->render('student/messages', ['conversations' => $conversations]);
+        $activeConversation = null;
+        $messages = [];
+        
+        if ($userId) {
+            $activeConversation = $this->UserModel->getUserById($userId);
+            $messages = $this->MessageModel->getMessagesBetweenUsers($_SESSION['user_id'], $userId);
+        }
+        
+        $this->render('student/messages', [
+            'conversations' => $conversations,
+            'activeConversation' => $activeConversation,
+            'messages' => $messages,
+            'announcementId' => $announcementId
+        ]);
     }
      public function Showprofile() { 
         $user = $this->StudentModel->GetinfoUSer($_SESSION['user_id']);
@@ -148,17 +164,21 @@ class StudentController extends BaseController {
             $content = $_POST['content'];
             $imageUrl = null;
 
-            // Gestion de l'upload d'image si présent
+            // Handle image upload if present
             if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
                 $imageUrl = $this->handleImageUpload($_FILES['image']);
             }
 
+            // Send message
             if ($this->MessageModel->sendMessage($senderId, $receiverId, $content, $imageUrl)) {
-                echo json_encode(['success' => true]);
+                // Redirect back to the conversation
+                header("Location: /student/messages?user=" . $receiverId);
+                exit;
             } else {
-                echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'envoi du message']);
+                // Handle error
+                header("Location: /student/messages?user=" . $receiverId . "&error=1");
+                exit;
             }
-            exit;
         }
     }
 

@@ -114,4 +114,14 @@ class User extends Db
             return false;
         }
     }
+
+    public function getUserById($userId) {
+        $sql = "SELECT id, fullname, email, profile_photo, role 
+                FROM users 
+                WHERE id = :userId";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

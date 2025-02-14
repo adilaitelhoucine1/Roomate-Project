@@ -8,7 +8,7 @@
     <!-- Add Font Awesome for better icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 relative">
     <div class="flex">
         <!-- Include Sidebar -->
         <?php include('layouts/sidebar.php'); ?>
@@ -122,7 +122,7 @@
                 </div>
 
                 <!-- Announcements Grid -->
-                <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <?php foreach($data as $anno): ?>
                     <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <?php endforeach; ?>
-                </div> -->
+                </div>
 
                 <!-- Pagination -->
                 <div class="flex justify-center mt-8">

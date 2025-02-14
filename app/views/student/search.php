@@ -199,9 +199,10 @@
                         </div>
 
                         <!-- Contact Button -->
-                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors">
-                            Contacter
-                        </button>
+                        <a href="/student/messages?user=<?= $anno['user_id'] ?>&announcement=<?= $anno['id'] ?>" 
+               class="block w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors text-center">
+                Contacter
+            </a>
                     </div>
                 </div>
                 <?php endforeach; ?>

@@ -80,7 +80,39 @@ class AdminController extends BaseController
       exit;
    }
 
+   public function blockUsers(){
 
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+         if (isset($_POST['block_user'])) {
+           
+             $status = $_POST['status'];
+            
+
+             $id = $_POST['id'];
+
+     $this->UserModel->blockUsers($status,$id);      
+
+           
+             
+         }
+     }
+     header('Location: /admin/users');
+
+     }
+     public function RemoveUsers(){
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+         if (isset($_POST['deleteuser'])) {
+             
+             $id = $_POST['user_id'];
+     $this->UserModel->removeUsers($id);      
+
+           
+             
+         }
+     }
+     header('Location: /admin/users');
+
+     }
 
    // public function categories() {}
 

@@ -143,7 +143,7 @@ class User extends Db
         $stmt->execute(['userId' => $userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
 
-
+    }
     public function getAllUsers()
     {
 

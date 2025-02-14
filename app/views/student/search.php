@@ -20,7 +20,7 @@
                 <!-- Main Search Bar -->
                 <div class="mt-6">
                     <div class="relative max-w-2xl">
-                        <input type="text" 
+                        <input type="text" id="search_input"
                                placeholder="Rechercher par ville, quartier..." 
                                class="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-white/50 text-white placeholder-blue-100">
                         <i class="fas fa-search absolute left-4 top-4 text-blue-100"></i>
@@ -173,9 +173,9 @@
 
 
             <!-- Search Results -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="searched_for">
                 <!-- Result Card -->
-                <?php foreach($data as $anno): ?>
+                <!-- <?php foreach($data as $anno): ?>
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
                     <div class="relative">
                         <img src="<?= $anno['photo_url'] ?>" alt="Apartment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
@@ -191,20 +191,21 @@
                         </div>
                         <p class="text-gray-600 text-sm mb-4"><?= $anno['address'] ?></p>
                         
-                        <!-- Features -->
+                        
                         <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
                             <span><i class="fas fa-bed mr-1"></i> 1 chambre</span>
                             <span><i class="fas fa-wifi mr-1"></i> Internet</span>
                             <span><i class="fas fa-couch mr-1"></i> Meublé</span>
                         </div>
 
-                        <!-- Contact Button -->
-                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors">
-                            Contacter
-                        </button>
+                        
+                        <a href="/student/messages?user=<?= $anno['user_id'] ?>&announcement=<?= $anno['id'] ?>" 
+               class="block w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors text-center">
+                Contacter
+            </a>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <?php endforeach; ?> -->    
                 <!-- Add more result cards here -->
             </div>
 
@@ -224,5 +225,75 @@
             </div>
         </main>
     </div>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    let searchInput = document.getElementById("search_input");
+    let cardsContainer = document.getElementById("searched_for");
+
+    function fetchAnnouncements(query = "") {
+        fetch(`/api/search?query=${query}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                cardsContainer.innerHTML = "";
+
+                if (data.length > 0) {
+                    data.forEach(announcement => {
+                        cardsContainer.innerHTML += `
+                            <div class="bg-white rounded-xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+                                <div class="relative">
+                                    <img src="${announcement.photo_url}" alt="Apartment" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+                                    <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded">Nouveau</span>
+                                    <button class="absolute top-4 right-4 bg-white/50 backdrop-blur-sm p-2 rounded-full hover:bg-white/75 transition-colors">
+                                        <i class="far fa-heart text-white"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-lg font-semibold text-gray-800">${announcement.title}</h3>
+                                        <span class="text-lg font-bold text-blue-600">${announcement.price}</span>
+                                    </div>
+                                    <p class="text-gray-600 text-sm mb-4">${announcement.address}</p>
+
+                                    <!-- Features -->
+                                    <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                                        <span><i class="fas fa-bed mr-1"></i> 1 chambre</span>
+                                        <span><i class="fas fa-wifi mr-1"></i> Internet</span>
+                                        <span><i class="fas fa-couch mr-1"></i> Meublé</span>
+                                    </div>
+
+                                    <!-- Contact Button -->
+                                    <a href="/student/messages?user=${announcement.user_id}&announcement=${announcement.id}" 
+                                        class="block w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors text-center">
+                                        Contacter
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    cardsContainer.innerHTML = "<p class='text-gray-500'>Aucune annonce trouvée</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                cardsContainer.innerHTML = "<p class='text-red-500'>Erreur de chargement des annonces</p>";
+            });
+    }
+
+    fetchAnnouncements();
+    searchInput.addEventListener("input", (e)=> {
+        fetchAnnouncements(e.target.value);
+        // console.log(e.target.value);
+    });
+});
+
+    </script>
 </body>
 </html> 

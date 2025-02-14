@@ -2,9 +2,9 @@
 
   
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'roommate'); 
+define('DB_NAME', 'roomate'); 
 define('DB_USER', 'root');    
-define('DB_PASSWORD', '');    
+define('DB_PASSWORD', '06database@SM23');    
 
 
 

@@ -3,16 +3,19 @@ require_once (__DIR__.'/../models/User.php');
 require_once (__DIR__.'/../models/Student.php');
 require_once (__DIR__.'/../models/Announcement.php');
 require_once (__DIR__.'/../models/searchmodel.php');
+require_once (__DIR__.'/../models/Message.php');
 
 class StudentController extends BaseController {
     private $UserModel;
     private $StudentModel;
     private $AnnouncementModel;
+    private $MessageModel;
 
     public function __construct(){
         $this->UserModel = new User();
         $this->StudentModel = new Student();
         $this->AnnouncementModel = new Announcement();
+        $this->MessageModel = new Message();
     }
     public function ShowDashboard() {
         $data = $this->AnnouncementModel->getallanounces();
@@ -24,7 +27,24 @@ class StudentController extends BaseController {
         $this->render('student/search',$data);
     }
      public function Showmessages() { 
-        $this->render('student/messages');
+        $userId = $_GET['user'] ?? null;
+        $announcementId = $_GET['announcement'] ?? null;
+        
+        $conversations = $this->MessageModel->getConversations($_SESSION['user_id']);
+        $activeConversation = null;
+        $messages = [];
+        
+        if ($userId) {
+            $activeConversation = $this->UserModel->getUserById($userId);
+            $messages = $this->MessageModel->getMessagesBetweenUsers($_SESSION['user_id'], $userId);
+        }
+        
+        $this->render('student/messages', [
+            'conversations' => $conversations,
+            'activeConversation' => $activeConversation,
+            'messages' => $messages,
+            'announcementId' => $announcementId
+        ]);
     }
      public function Showprofile() { 
         $user = $this->StudentModel->GetinfoUSer($_SESSION['user_id']);
@@ -134,6 +154,47 @@ class StudentController extends BaseController {
                 exit;
            // }
     
+    }
+
+    // Envoyer un nouveau message
+    public function sendMessage() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $senderId = $_SESSION['user_id'];
+            $receiverId = $_POST['receiver_id'];
+            $content = $_POST['content'];
+            $imageUrl = null;
+
+            // Handle image upload if present
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+                $imageUrl = $this->handleImageUpload($_FILES['image']);
+            }
+
+            // Send message
+            if ($this->MessageModel->sendMessage($senderId, $receiverId, $content, $imageUrl)) {
+                // Redirect back to the conversation
+                header("Location: /student/messages?user=" . $receiverId);
+                exit;
+            } else {
+                // Handle error
+                header("Location: /student/messages?user=" . $receiverId . "&error=1");
+                exit;
+            }
+        }
+    }
+
+    private function handleImageUpload($file) {
+        $uploadDir = 'uploads/messages/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = uniqid() . '_' . basename($file['name']);
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+            return $targetPath;
+        }
+        return null;
     }
 }
 ?>

@@ -12,7 +12,7 @@
     <div class="flex min-h-screen">
         <?php include('layouts/admin_sidebar.php'); ?>
 
-        <main class="flex-1 p-8 ml-64">
+        <main class="flex-1 p-8 ml-72">
             <div class="mb-10">
                 <h1 class="text-3xl font-bold text-gray-900">Gestion des Signalements</h1>
                 <p class="text-gray-600 mt-2">Traitement et suivi des signalements utilisateurs</p>

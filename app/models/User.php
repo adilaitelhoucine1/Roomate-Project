@@ -29,8 +29,10 @@ class User extends Db
             profile_photo,
             smoking,
             pets,
-            guests
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            guests,
+            email_verified,
+            verification_code
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->connection->prepare($query);
 
@@ -46,7 +48,9 @@ class User extends Db
                 $userData['profile_photo'],
                 $userData['smoking'],
                 $userData['pets'],
-                $userData['guests']
+                $userData['guests'],
+                $userData['verified'],
+                $userData['verification_code']
             ]);
 
             return $this->connection->lastInsertId();
@@ -85,33 +89,48 @@ class User extends Db
             return false;
         }
     }
+    // public function verifyEmail($email)
+    // {
+    //     $query = "UPDATE users SET verified = 1 WHERE email = ?";
+    //     $stmt = $this->connection->prepare($query);
+    //     $stmt->execute([$email]);
+    //     return $stmt->rowCount() > 0;
+    // }
 
-    public function getReports()
+
+    public function removeUsers($id)
     {
-        $query = "SELECT 
-            r.*,
-            u.fullname as user_name,
-            u.profile_photo as user_image,
-            a.title as announcement_title,
-            COALESCE(r.admin_note, 'Non renseigné') as admin_note
-        FROM reports r
-        LEFT JOIN users u ON r.reporter_id = u.id
-        LEFT JOIN announcements a ON r.announcement_id = a.id
-        ORDER BY r.creation_date DESC";
-
+        $query = "DELETE FROM users WHERE id = :id";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $stmt->bindParam(":id", $id);
+
+        try {
+            $stmt->execute();
+            return 1;
+        } catch (PDOException $e) {
+            die("Erreur Lors de Suppression : " . $e);
+        }
     }
 
-    public function updateReportStatus($reportId, $status, $adminNote)
+    public function blockUsers($status, $id)
     {
+        $status = trim(strtolower($status));
         try {
-            $query = "UPDATE reports SET status = ?, admin_note = ? WHERE id = ?";
+            if ($status == "inactive") {
+
+                $query = "UPDATE users SET status = 'active' WHERE id = :id";
+            } else {
+
+                $query = "UPDATE users SET status = 'inactive' WHERE id = :id";
+            }
+
             $stmt = $this->connection->prepare($query);
-            return $stmt->execute([$status, $adminNote, $reportId]);
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+
+            return 1;
         } catch (PDOException $e) {
-            return false;
+            die("Erreur lors de la mise à jour du statut : " . $e->getMessage());
         }
     }
 
@@ -123,5 +142,16 @@ class User extends Db
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['userId' => $userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    public function getAllUsers()
+    {
+
+        $query = "SELECT * FROM users";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
     }
 }
